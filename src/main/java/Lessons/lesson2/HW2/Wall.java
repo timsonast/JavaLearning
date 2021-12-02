@@ -12,7 +12,7 @@ public class Wall implements Obstacle {
 
     @Override
     public boolean contest(Contestant contestant) {
-        if(contestant.run(height)){
+        if(contestant.jump(height)){
             System.out.println(contestant.toString() + " перепрыгнул препятствие!");
             return true;
         }else{
