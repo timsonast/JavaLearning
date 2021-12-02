@@ -2,6 +2,9 @@ package Lessons.lesson3.HW3;
 
 public class HW3 {
     public static int arraySum(String[][] arr) {
+        if(arr.length !=4){
+            throw new MyArraySizeException("неверный размер массива");
+        }
         int sum = 0;
         if(arr[0].length > 4 || arr[1].length >4 || arr[2].length > 4 || arr[3].length > 4) {
             throw new MyArraySizeException("неверный размер массива");
