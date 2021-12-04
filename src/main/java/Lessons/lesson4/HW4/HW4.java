@@ -2,7 +2,6 @@ package Lessons.lesson4.HW4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class HW4 {
 
@@ -15,10 +14,9 @@ public class HW4 {
         }
 
         System.out.println(array.toString());
-        List<Integer> integerList = new ArrayList<>();
-        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        ArrayToList.intArrayToList(arr, integerList);
-        System.out.println(integerList);
+        Integer[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        ArrayList<Integer> integers = ArrayToList.convertToList(arr);
+        System.out.println(integers);
 
         Box<Apple> appleBox = new Box<>(new ArrayList<>(Arrays.asList(
                 new Apple(1.2f),
