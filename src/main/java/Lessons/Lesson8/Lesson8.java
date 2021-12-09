@@ -5,31 +5,38 @@ import Lessons.Lesson8.HW8.Employee;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 
 public class Lesson8 {
-    public static void main(String[] args) {
-        String[] arr = {"A", "B", "C", "D", "E", "F", "F", "A", "B", "D"};
-        String result = Arrays.stream(arr).collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
-                .entrySet().stream().max(Comparator.comparingLong(Map.Entry::getValue)).get().getKey();
-        System.out.println(result);
-
-        Employee[] employees = {
-                new Employee("Bob", 20, 2000),
-                new Employee("Max", 21, 5000),
-                new Employee("Anna", 27, 6000),
-                new Employee("Valery", 23, 5500),
-                new Employee("Alex", 23, 5100),
-                new Employee("Sergey", 30, 8000),
-                new Employee("Valencia", 42, 15000)
-        };
-        Arrays.stream(employees).mapToInt(Employee::getSalary).average().stream().forEach(System.out::println);
-        seniorEmployee(employees);
-
+    static class Person {
+        enum Position {
+            ENGINEER, DIRECTOR, MANAGER;
+        }
+        private String name;
+        private int age;
+        private Position position;
+        public Person(String name, int age, Position position) {
+            this.name = name;
+            this.age = age;
+            this.position = position;
+        }
     }
-
-    private static void seniorEmployee(Employee[] employees) {
-        Arrays.stream(employees).sorted((o1, o2) -> o2.getAge() - o1.getAge()).map(Employee::getName).forEach(System.out::println);
+    private static void streamSimpleTask() {
+        List<Person> persons = new ArrayList<>(Arrays.asList(
+                new Person("Bob1", 35, Person.Position.MANAGER),
+                new Person("Bob2", 44, Person.Position.DIRECTOR),
+                new Person("Bob3", 25, Person.Position.ENGINEER),
+                new Person("Bob4", 42, Person.Position.ENGINEER),
+                new Person("Bob5", 55, Person.Position.MANAGER),
+                new Person("Bob6", 19, Person.Position.MANAGER),
+                new Person("Bob7", 33, Person.Position.ENGINEER),
+                new Person("Bob8", 37, Person.Position.MANAGER)
+        ));
+        List<String> engineersNames = persons.stream()
+                .filter(person -> person.position == Person.Position.ENGINEER)
+                .sorted((o1, o2) -> o1.age - o2.age)
+                .map((Function<Person, String>) person -> person.name)
+                .collect(Collectors.toList());
+        System.out.println(engineersNames);
     }
 }
